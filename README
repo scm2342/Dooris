@@ -1,0 +1,7 @@
+This has been built with scala (scala-lang.org)
+The ant buildfile (build.xml) is included but you still need a working scala compiler and the proguard java package (http://proguard.sourceforge.net).
+Also you need to create a "tools" directory at the toplevel of the project and create (symbolic) links pointing to "proguard.jar", "scala-compiler.jar" and "scala-library.jar".
+The build.xml is a slightly changed version from http://www.assembla.com/wiki/show/scala-ide/Developing_for_Android to still include the necessary classes.
+
+Have fun
+	scm
