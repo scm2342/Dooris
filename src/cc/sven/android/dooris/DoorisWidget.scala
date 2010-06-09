@@ -4,9 +4,8 @@ import android.appwidget._
 import android.util.Log
 import android.content._
 import android.widget.RemoteViews
-import java.io._
 import java.net._
-import scala.io.Source
+import java.io.IOException
 import scala.collection.immutable.Stream
 
 class DoorisWidget extends AppWidgetProvider {
@@ -16,8 +15,10 @@ class DoorisWidget extends AppWidgetProvider {
     val appWidgetIdsList = appWidgetIds toList
 
     try {
-      val url = new URL("http://dooris.koalo.de/door.txt")
-      val uis = url.openStream
+      val uconn = (new URL("http://dooris.koalo.de/door.txt")).openConnection
+      uconn.setConnectTimeout(3000)
+      uconn.setReadTimeout(5000)
+      val uis = uconn.getInputStream
       val stream = Stream.continually(uis.read).take(100).takeWhile(_ != -1).map((i) => i toChar).takeWhile(_ != '\n')
       setStr(stream.mkString)
       uis.close
